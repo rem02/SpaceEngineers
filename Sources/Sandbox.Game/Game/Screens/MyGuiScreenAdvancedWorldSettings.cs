@@ -527,35 +527,34 @@ namespace Sandbox.Game.Gui
             page.Controls.Add(m_grinder_x1);
             page.Controls.Add(m_grinder_x2);
             page.Controls.Add(m_grinder_x5);
-            // L 6 C  0
+
             currentLine += jumpLine;
             m_permanentDeath = new MyGuiControlCheckbox();
             m_permanentDeath.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsPermanentDeath));
             m_permanentDeath.Position = ComputeControlPosition(currentLine, m_permanentDeath, paddingX);
             page.Controls.Add(m_permanentDeath);
-            // L 6 C  1
+   
             Vector2 startColum1 = m_permanentDeath.Position + new Vector2(0.05f, 0f);
             resetOwnershipLabel.Position = startColum1;
             m_resetOwnership = new MyGuiControlCheckbox();
             m_resetOwnership.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsResetOwnership));
             m_resetOwnership.Position = ComputeControlPosition(startColum1, m_resetOwnership, paddingX);
             page.Controls.Add(m_resetOwnership);
-            // L 7 C  0
+
             currentLine += jumpLine;
             autoHealingLabel.Position = currentLine;
             m_autoHealing = new MyGuiControlCheckbox();
             m_autoHealing.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsAutoHealing));
             m_autoHealing.Position = ComputeControlPosition(currentLine, m_autoHealing, paddingX);
             page.Controls.Add(m_autoHealing);
-            // L 7 C  1
+
             startColum1 += jumpLine;
             enableJetpackLabel.Position = startColum1;
             m_enableJetpack = new MyGuiControlCheckbox();
             m_enableJetpack.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettings_EnableJetpack));
             m_enableJetpack.Position = ComputeControlPosition(startColum1, m_enableJetpack, paddingX);
             page.Controls.Add(m_enableJetpack);
-
-            // L 8 C  0
+            
             currentLine += jumpLine;
             oxygenLabel.Position = currentLine;
             m_enableOxygen = new MyGuiControlCheckbox();
@@ -591,7 +590,6 @@ namespace Sandbox.Game.Gui
             m_enableOxygen.Position = ComputeControlPosition(currentLine, m_enableOxygen, paddingX);
             page.Controls.Add(m_enableOxygen);
 
-            // L 8 C  1
             startColum1 += jumpLine;
             oxygenPressurizationLabel.Position = startColum1;
             m_enableOxygenPressurization = new MyGuiControlCheckbox();
@@ -622,15 +620,13 @@ namespace Sandbox.Game.Gui
             m_enableOxygenPressurization.Position = ComputeControlPosition(startColum1, m_enableOxygenPressurization, paddingX);
             page.Controls.Add(m_enableOxygenPressurization);
 
-            //L9C0
             currentLine += jumpLine;
             enableWeaponsLabel.Position = currentLine;
             m_weaponsEnabled = new MyGuiControlCheckbox();
             m_weaponsEnabled.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsWeapons));
             m_weaponsEnabled.Position = ComputeControlPosition(currentLine, m_weaponsEnabled, paddingX);
             page.Controls.Add(m_weaponsEnabled);
-
-            // L 9 C 1
+            
             startColum1 += jumpLine;
             spawnWithToolsLabel.Position = startColum1;
             m_spawnWithTools = new MyGuiControlCheckbox();
@@ -638,31 +634,21 @@ namespace Sandbox.Game.Gui
             m_spawnWithTools.Position = ComputeControlPosition(startColum1, m_spawnWithTools, paddingX);
             page.Controls.Add(m_spawnWithTools);
 
+            currentLine += jumpLine;
+            thrusterDamageLabel.Position = currentLine;
+            m_thrusterDamage = new MyGuiControlCheckbox();
+            m_thrusterDamage.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsThrusterDamage));
+            m_thrusterDamage.Position = ComputeControlPosition(currentLine, m_thrusterDamage, paddingX);
+            page.Controls.Add(m_thrusterDamage);
+
             if (MyFakes.ENABLE_TOOL_SHAKE)
             {
-                currentLine += jumpLine;
-                m_enableToolShakeLabel.Position = currentLine;
+                startColum1 += jumpLine;
+                m_enableToolShakeLabel.Position = startColum1;
                 m_enableToolShake = new MyGuiControlCheckbox();
                 m_enableToolShake.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettings_ToolShake));
-                m_enableToolShake.Position = ComputeControlPosition(currentLine, m_enableToolShake, paddingX);
+                m_enableToolShake.Position = ComputeControlPosition(startColum1, m_enableToolShake, paddingX);
                 page.Controls.Add(m_enableToolShake);
-
-                startColum1 += jumpLine;
-                thrusterDamageLabel.Position = startColum1;
-                m_thrusterDamage = new MyGuiControlCheckbox();
-                m_thrusterDamage.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsThrusterDamage));
-                m_thrusterDamage.Position = ComputeControlPosition(startColum1, m_thrusterDamage, paddingX);
-                page.Controls.Add(m_thrusterDamage);
-
-            }
-            else
-            {
-                currentLine += jumpLine;
-                thrusterDamageLabel.Position = currentLine;
-                m_thrusterDamage = new MyGuiControlCheckbox();
-                m_thrusterDamage.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsThrusterDamage));
-                m_thrusterDamage.Position = ComputeControlPosition(currentLine, m_thrusterDamage, paddingX);
-                page.Controls.Add(m_thrusterDamage);
             }
         }
 
@@ -674,11 +660,13 @@ namespace Sandbox.Game.Gui
             page.Name = "PageAdvanced";
             page.Text = new StringBuilder("Advanced");
             page.TextScale = 0.9f;
-
+            float width = 0.284375f + 0.025f;
             Vector2 originL = -m_size.Value * 0.5f + new Vector2(0.03f, 0.08f);
 
             // Label first !
             Vector2 currentLine = originL;
+            m_maxBackupSavesLabel = MakeLabel(page, currentLine, MySpaceTexts.MaxBackupSaves);
+            currentLine += jumpLine;
             var enableSpectatorLabel = MakeLabel(page, currentLine, MySpaceTexts.WorldSettings_EnableSpectator);
             if (MyFakes.ENABLE_PROGRAMMABLE_BLOCK)
             {
@@ -711,6 +699,20 @@ namespace Sandbox.Game.Gui
             // reset line position
             currentLine = originL;
             // Add control
+            m_maxBackupSavesSlider = new MyGuiControlSlider(
+                width: width, 
+                minValue: 0,
+                maxValue: 1000,
+                labelText: new StringBuilder("{0}").ToString(),
+                labelDecimalPlaces: 0,
+                labelSpaceWidth: 0.05f,
+                intValue: true
+                );
+            m_maxBackupSavesSlider.SetToolTip(MyTexts.GetString(MySpaceTexts.MaxBackupSaves));
+            m_maxBackupSavesSlider.Position = ComputeControlPosition(currentLine, m_maxBackupSavesSlider, paddingX);
+            page.Controls.Add(m_maxBackupSavesSlider);
+
+            currentLine += jumpLine;
             m_enableSpectator = new MyGuiControlCheckbox();
             m_enableSpectator.SetToolTip(MyTexts.GetString(MySpaceTexts.ToolTipWorldSettingsEnableSpectator));
             m_enableSpectator.Position = ComputeControlPosition(currentLine, m_enableSpectator, paddingX);
@@ -1038,7 +1040,7 @@ namespace Sandbox.Game.Gui
             //output.MaxPlayers = (short)m_maxPlayersSlider.Value;
             output.MaxFloatingObjects = (short)m_maxFloatingObjectsSlider.Value;
 
-            //output.MaxBackupSaves = (short)m_maxBackupSavesSlider.Value;
+            output.MaxBackupSaves = (short)m_maxBackupSavesSlider.Value;
 
             output.SunRotationIntervalMinutes = MathHelper.Clamp(MathHelper.InterpLog(m_sunRotationIntervalSlider.Value, MIN_DAY_TIME_MINUTES, MAX_DAY_TIME_MINUTES), MIN_DAY_TIME_MINUTES, MAX_DAY_TIME_MINUTES);
 
@@ -1108,7 +1110,7 @@ namespace Sandbox.Game.Gui
            // m_maxPlayersSlider.Value = settings.MaxPlayers;
             m_maxFloatingObjectsSlider.Value = settings.MaxFloatingObjects;
 
-            //m_maxBackupSavesSlider.Value = settings.MaxBackupSaves;
+            m_maxBackupSavesSlider.Value = settings.MaxBackupSaves;
 
             m_enableVoxelDestruction.IsChecked = settings.EnableVoxelDestruction;
             m_enableDrones.IsChecked = settings.EnableDrones;
